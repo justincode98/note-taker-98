@@ -118,7 +118,10 @@ const handleRenderSaveBtn = () => {
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
+  console.log("init jsonNote ");
   let jsonNotes = await notes.json();
+  jsonNotes = Object.entries(notes);//change to array based on notes? https://www.javascripttutorial.net/object/convert-an-object-to-an-array-in-javascript/
+  console.log("after init this is " + typeof jsonNotes);
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
@@ -153,6 +156,7 @@ const renderNoteList = async (notes) => {
 
     return liEl;
   };
+  console.log("this is before for each " + typeof jsonNotes);
 
   if (jsonNotes.length === 0) {
     noteListItems.push(createLi('No saved Notes', false));
