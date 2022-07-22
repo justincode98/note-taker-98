@@ -4,6 +4,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
+
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -117,11 +118,20 @@ const handleRenderSaveBtn = () => {
 };
 
 // Render the list of note titles
-const renderNoteList = async (notes) => {
+//see https://stackoverflow.com/a/42272155
+//removing arrow function
+const renderNoteList = async function() {
+  //adding fetch for the await!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!LOOK HERE
+  //also changing "notes" to another variable name "bongos"
+  let bongos = await fetch("../../../db/db.json");
   console.log("init jsonNote ");
-  let jsonNotes = await notes.json();
-  jsonNotes = Object.entries(notes);//change to array based on notes? https://www.javascripttutorial.net/object/convert-an-object-to-an-array-in-javascript/
-  console.log("after init this is " + typeof jsonNotes);
+  let jsonNotes = await bongos.json();
+  jsonNotes = JSON.parse(jsonNotes);
+  console.log("after init1 this is " + jsonNotes);
+  console.log("length1 this is " + jsonNotes.length);
+  jsonNotes = Object.entries(bongos);//change to array based on notes? https://www.javascripttutorial.net/object/convert-an-object-to-an-array-in-javascript/
+  console.log("after init2 this is " + jsonNotes);
+  console.log("length2 this is " + jsonNotes.length);
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
