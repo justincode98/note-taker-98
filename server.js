@@ -15,8 +15,11 @@ app.use(express.static('public'));
 
 //------------------------------------------FUNTIONS, previously lib----------------------------------
 
-function getNotes(query, database) {
-  return JSON.parse(fs.readFileSync("./db/db.json"));
+function getTheNotes(query, database) { //named changed just in case of conflict
+  
+  const result = JSON.parse(fs.readFileSync("./db/db.json"));
+  console.log("resulting json parse is " + result);
+  return result;
 }
 
 function findById(id, database) {
@@ -51,7 +54,7 @@ function deleteNote(body, notes) {
 
 app.get('/api/notes/', (req, res) => {
   console.log("called to get");
-  const result = getNotes(req, notes);
+  const result = getTheNotes(req, notes);
   console.log(result);
   res.json(result);
   /*if (result) {

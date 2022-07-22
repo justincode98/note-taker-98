@@ -119,17 +119,32 @@ const handleRenderSaveBtn = () => {
 
 // Render the list of note titles
 //see https://stackoverflow.com/a/42272155
-//removing arrow function
-const renderNoteList = async function() {
+const renderNoteList = async (notes) => {
   //adding fetch for the await!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!LOOK HERE
-  //also changing "notes" to another variable name "bongos"
-  let bongos = await fetch("../../../db/db.json");
+  //let notes = await fetch("../../../db/db.json");
   console.log("init jsonNote ");
-  let jsonNotes = await bongos.json();
-  jsonNotes = JSON.parse(jsonNotes);
+  let jsonNotes = await notes.json();
+  //should be getting
+  /*
+  {
+  notes: [
+    {
+      title: 'iee',
+      text: 'lw',
+      id: '38a55fee-c5b8-42bd-a4de-eb89f2ca2db7'
+    },
+    {
+      title: 'nkf',
+      text: 'skns',
+      id: '759740de-020b-46ec-9f5c-d568de5aaafb'
+    }
+  ]
+}
+  */
+  //jsonNotes = JSON.parse(jsonNotes);
   console.log("after init1 this is " + jsonNotes);
   console.log("length1 this is " + jsonNotes.length);
-  jsonNotes = Object.entries(bongos);//change to array based on notes? https://www.javascripttutorial.net/object/convert-an-object-to-an-array-in-javascript/
+  jsonNotes = Object.entries(notes);//change to array based on notes? https://www.javascripttutorial.net/object/convert-an-object-to-an-array-in-javascript/
   console.log("after init2 this is " + jsonNotes);
   console.log("length2 this is " + jsonNotes.length);
   if (window.location.pathname === '/notes') {
